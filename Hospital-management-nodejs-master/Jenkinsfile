@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         NODEJS_VERSION = '14'
+        SONAR_SCANNER_VERSION = '4.6.0.2311'
     }
 
     stages {
@@ -42,13 +43,12 @@ pipeline {
          stage('SonarQube Analysis') {
             steps {
                 script {
-                    dir('Hospital-management-nodejs-master') {
-                        withSonarQubeEnv('sonar') {
-                            sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
+                    def scannerHome = tool 'SonarQube Scanner';
+                    withSonarQubeEnv('sonar') {
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=."
                         }
                     }
                 }
-            }
         }
     }
 }
