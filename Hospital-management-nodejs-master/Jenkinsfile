@@ -1,18 +1,53 @@
-pipeline{
-  agent any
-  stages{
-    stage('integration')
-    {
-      steps{
-        git'https://github.com/saikumarvsk/Hospitality.git'
-      }
+pipeline {
+    agent any
+
+    environment {
+        NODEJS_VERSION = '14'
     }
-    stage('sonarqube analysis'){
-      steps{
-        nodejs(nodeJSInstallationName: 'nodejs'){
-          sh "npm install"
+
+    stages {
+        stage('Integration') {
+            steps {
+                // Checkout the code from your Git repository
+                git 'https://github.com/saikumarvsk/Hospitality.git'
+            }
         }
-      }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Change to the project directory
+                    dir('Hospital-management-nodejs-master') {
+                        // Set up Node.js and install project dependencies
+                        withNodejs(nodejsInstallationName: "node${NODEJS_VERSION}") {
+                            sh 'npm install'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Run your tests
+                    withNodejs(nodejsInstallationName: "node${NODEJS_VERSION}") {
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+
+        // Add more stages as needed for deployment or additional steps
     }
-  }
+
+    post {
+        success {
+            echo 'Pipeline successfully executed. Run additional post-build tasks here.'
+        }
+
+        failure {
+            echo 'Pipeline failed. Handle failure or cleanup tasks here.'
+        }
+    }
 }
