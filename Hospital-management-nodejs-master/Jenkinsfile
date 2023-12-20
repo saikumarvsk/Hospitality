@@ -7,5 +7,16 @@ pipeline{
         git 'https://github.com/saikumarvsk/Hospitality.git'
       }
     }
+    stage('Test')
+    {
+      steps{
+        sonarscanner \
+  -Dsonar.projectKey=Hospitality \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://13.235.246.42:9000 \
+  -Dsonar.login=squ_2e920731813cb579e8303294448184203186825f
+      }
+    }
+        
   }
 }
