@@ -19,9 +19,7 @@ pipeline {
                     // Change to the project directory
                     dir('Hospital-management-nodejs-master') {
                         // Set up Node.js and install project dependencies
-                        withNodejs(nodejsInstallationName: "node${NODEJS_VERSION}") {
-                            sh 'npm install'
-                        }
+                        sh 'npm install'
                     }
                 }
             }
@@ -31,9 +29,7 @@ pipeline {
             steps {
                 script {
                     // Run your tests
-                    withNodejs(nodejsInstallationName: "node${NODEJS_VERSION}") {
-                        sh 'npm test'
-                    }
+                    sh 'npm test'
                 }
             }
         }
