@@ -7,5 +7,12 @@ pipeline{
         git'https://github.com/saikumarvsk/Hospitality.git'
       }
     }
+    stage('sonarqube analysis'){
+      steps{
+        nodejs(nodejsinstallationname: 'nodejs'){
+          sh "npm install"
+        }
+      }
+    }
   }
 }
