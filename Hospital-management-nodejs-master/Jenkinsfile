@@ -1,0 +1,11 @@
+pipeline{
+  agent any
+  stages{
+    stage('integration')
+    {
+      steps{
+        git 'git 'https://github.com/saikumarvsk/Hospitality.git''
+      }
+    }
+  }
+}
