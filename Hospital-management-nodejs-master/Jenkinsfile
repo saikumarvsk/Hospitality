@@ -43,7 +43,7 @@ pipeline {
          stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool 'SonarQube Scanner';
+                    def scannerHome = tool 'sonarscanner';
                     withSonarQubeEnv('sonarscanner') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=."
                         }
