@@ -25,16 +25,20 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                     dir('Hospital-management-nodejs-master')
-                    // Run your tests
-                    sh 'npm test'
-                }
+       stage('Run Tests') {
+    steps {
+        script {
+            // Change to the project directory
+            dir('Hospital-management-nodejs-master') {
+                // Install dependencies
+                //sh 'npm install'
+
+                // Run your tests
+                sh 'npm test'
             }
         }
+    }
+}
 
-        // Add more stages as needed for deployment or additional steps
     }
 }
