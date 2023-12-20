@@ -25,20 +25,21 @@ pipeline {
             }
         }
 
-       stage('Run Tests') {
-    steps {
-        script {
-            // Change to the project directory
-            dir('Hospital-management-nodejs-master') {
-                // Install dependencies
-                //sh 'npm install'
+        stage('Run Tests') {
+            steps {
+                script {
+                    // Change to the project directory
+                    dir('Hospital-management-nodejs-master') {
+                        // Install dependencies
+                        // sh 'npm install'
 
-                // Run your tests
-                sh 'npm test'
+                        // Run your tests (replace 'your_test_command_here' with the actual command)
+                        sh 'npm test'
+                    }
+                }
             }
         }
-    }
-}
+         
 
     }
 }
