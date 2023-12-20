@@ -42,12 +42,13 @@ pipeline {
          stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('sonar') {
-                        sh "sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=."
+                    dir('Hospital-management-nodejs-master') {
+                        withSonarQubeEnv('sonar') {
+                            sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
+                        }
                     }
                 }
             }
         }
-
     }
 }
