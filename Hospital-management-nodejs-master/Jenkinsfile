@@ -4,17 +4,8 @@ pipeline{
     stage('integration')
     {
       steps{
-        git 'https://github.com/saikumarvsk/Hospitality.git'
+        git'https://github.com/saikumarvsk/Hospitality.git'
       }
     }
-    stage("Sonarqube Analysis "){
-            steps{
-                withSonarQubeEnv('sonarscanner') {
-                    sh ''' $SCANNER_HOME/bin/sonarscanner -Dsonar.projectName=Hospitality \
-                    -Dsonar.projectKey=Hospitality '''
-        }
-    }
-}
-
   }
 }
