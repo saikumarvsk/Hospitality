@@ -39,7 +39,15 @@ pipeline {
                 }
             }
         }
-         
+         stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('sonar') {
+                        sh "sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=."
+                    }
+                }
+            }
+        }
 
     }
 }
