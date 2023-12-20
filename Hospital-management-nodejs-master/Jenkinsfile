@@ -9,7 +9,7 @@ pipeline{
     }
     stage('sonarqube analysis'){
       steps{
-        nodejs(nodejsinstallationname: 'nodejs'){
+        nodejs(nodeJSInstallationName: 'nodejs'){
           sh "npm install"
         }
       }
