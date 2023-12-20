@@ -28,6 +28,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                     dir('Hospital-management-nodejs-master')
                     // Run your tests
                     sh 'npm test'
                 }
@@ -35,15 +36,5 @@ pipeline {
         }
 
         // Add more stages as needed for deployment or additional steps
-    }
-
-    post {
-        success {
-            echo 'Pipeline successfully executed. Run additional post-build tasks here.'
-        }
-
-        failure {
-            echo 'Pipeline failed. Handle failure or cleanup tasks here.'
-        }
     }
 }
