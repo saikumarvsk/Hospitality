@@ -10,6 +10,7 @@ pipeline{
     stage('Test')
     {
       steps{
+        script{
         sonarscanner \
   -Dsonar.projectKey=Hospitality \
   -Dsonar.host.url=http://13.235.246.42:9000 \
