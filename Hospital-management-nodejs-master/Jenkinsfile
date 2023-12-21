@@ -45,7 +45,7 @@ pipeline {
                 script {
                     withCredentials([
                         usernamePassword(
-                            credentialsId: 'squ_9b1379165012897a650e018b36aa38d7920fe2f8',
+                            credentialsId: 'sqa_2f1b728face1cbd2f7f7f40ead585439afee3232',
                             usernameVariable: 'admin',
                             passwordVariable: 'password'
                         )
