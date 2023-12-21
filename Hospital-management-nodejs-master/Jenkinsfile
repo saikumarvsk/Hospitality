@@ -40,22 +40,14 @@ pipeline {
                 }
             }
         }
-         stage('SonarQube Analysis') {
+    stage('SonarQube Analysis') {
             steps {
                 script {
-                    withCredentials([
-                        usernamePassword(
-                            credentialsId: 'sqa_2f1b728face1cbd2f7f7f40ead585439afee3232',
-                            usernameVariable: 'admin',
-                            passwordVariable: 'password'
-                        )
-                    ]) {
-                        dir('Hospital-management-nodejs-master') {
-                            sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=. -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASSWORD -X"
-                        }
+                    withSonarQubeEnv('sonar') {
+                        sh "${SONAR_SCANNER_HOME}/bin/sonar-scanner"
                     }
-                }
-        }
+                }     
+    }
     }
 }
 }
