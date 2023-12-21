@@ -43,11 +43,15 @@ pipeline {
          stage('SonarQube Analysis') {
             steps {
                 script {
-                    withCredentials([string(sonar: 'squ_9b1379165012897a650e018b36aa38d7920fe2f8', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'squ_9b1379165012897a650e018b36aa38d7920fe2f8',
+                            usernameVariable: 'admin',
+                            passwordVariable: 'password'
+                        )
+                    ]) {
                         dir('Hospital-management-nodejs-master') {
-                            sh '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=. -Dsonar.login=$SONAR_TOKEN -X'
-                        }
-                    }
+                            sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=Hospitality -Dsonar.sources=. -Dsonar.login=$SONAR_LOGIN -Dsonar.password=$SONAR_PASSWORD -X"
                         }
                     }
                 }
